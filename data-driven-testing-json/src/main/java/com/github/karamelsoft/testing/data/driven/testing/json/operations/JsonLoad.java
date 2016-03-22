@@ -21,13 +21,13 @@ public class JsonLoad<O> implements Load<O> {
             objectMapper = new ObjectMapper();
         }
 
-        public Builder configure(Consumer<ObjectMapper> configurator) {
+        public Builder configure(final Consumer<ObjectMapper> configurator) {
             configurator.accept(objectMapper);
 
             return this;
         }
 
-        public Builder type(Class<O> type) {
+        public Builder type(final Class<O> type) {
             this.type = type;
 
             return this;
@@ -45,13 +45,13 @@ public class JsonLoad<O> implements Load<O> {
     private final ObjectMapper objectMapper;
     private final Class<O> type;
 
-    private JsonLoad(Builder builder) {
+    private JsonLoad(final Builder builder) {
         objectMapper = builder.objectMapper;
         type = builder.type;
     }
 
     @Override
-    public O load(InputStream input) throws IOException {
+    public O load(final InputStream input) throws IOException {
         return objectMapper.readValue(input, type);
     }
 }

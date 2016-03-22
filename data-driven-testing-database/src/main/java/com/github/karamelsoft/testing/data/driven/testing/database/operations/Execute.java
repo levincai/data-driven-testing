@@ -26,13 +26,13 @@ public class Execute implements Runnable {
         }
 
         @Override
-        public SQLBuilder<Builder> dataSource(DataSource dataSource) {
+        public SQLBuilder<Builder> dataSource(final DataSource dataSource) {
             this.dataSource = dataSource;
             return this;
         }
 
         @Override
-        public Builder sql(String order) {
+        public Builder sql(final String order) {
             orders.add(order);
             return this;
         }
@@ -46,8 +46,8 @@ public class Execute implements Runnable {
         return new Builder();
     }
 
-    public static Builder newBuilder(Execute copy) {
-        Builder builder = new Builder();
+    public static Builder newBuilder(final Execute copy) {
+        final Builder builder = new Builder();
         builder.dataSource = copy.dataSource;
         builder.orders = new ArrayList<>(copy.orders);
         return builder;
@@ -56,7 +56,7 @@ public class Execute implements Runnable {
     private final DataSource dataSource;
     private final Collection<String> orders;
 
-    private Execute(Builder builder) {
+    private Execute(final Builder builder) {
         dataSource = builder.dataSource;
         orders = builder.orders;
     }

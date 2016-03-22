@@ -1,17 +1,47 @@
 package com.github.karamelsoft.testing.data.driven.testing.database.operations;
 
 import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
-import com.github.karamelsoft.testing.data.driven.testing.database.builders.SQLBuilder;
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Script;
 import com.github.karamelsoft.testing.data.driven.testing.database.builders.DataSourceBuilder;
+import com.github.karamelsoft.testing.data.driven.testing.database.builders.SQLBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.function.Consumer;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by frederic on 03/06/15.
  */
-public class Query implements Consumer<Tester> {
+public class Query implements Script<Object, List<Map<String, Object>>> {
+
+    private final DataSource dataSource;
+    private final String query;
+
+    private Query(final Builder builder) {
+        dataSource = builder.dataSource;
+        query = builder.query;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public static Builder newBuilder(final Query copy) {
+        final Builder builder = new Builder();
+        builder.dataSource = copy.dataSource;
+        builder.query = copy.query;
+
+        return builder;
+    }
+
+    @Override
+    public Tester<List<Map<String, Object>>> execute(final Tester<Object> tester) {
+        return
+            tester.value(
+                new JdbcTemplate(dataSource)
+                    .queryForList(query));
+    }
 
     public static class Builder
         implements
@@ -25,13 +55,13 @@ public class Query implements Consumer<Tester> {
         }
 
         @Override
-        public SQLBuilder<Builder> dataSource(DataSource dataSource) {
+        public SQLBuilder<Builder> dataSource(final DataSource dataSource) {
             this.dataSource = dataSource;
             return this;
         }
 
         @Override
-        public Builder sql(String order) {
+        public Builder sql(final String order) {
             this.query = order;
             return this;
         }
@@ -39,32 +69,5 @@ public class Query implements Consumer<Tester> {
         public Query build() {
             return new Query(this);
         }
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
-    public static Builder newBuilder(Query copy) {
-        Builder builder = new Builder();
-        builder.dataSource = copy.dataSource;
-        builder.query = copy.query;
-
-        return builder;
-    }
-
-    private final DataSource dataSource;
-    private final String query;
-
-    private Query(Builder builder) {
-        dataSource = builder.dataSource;
-        query = builder.query;
-    }
-
-    @Override
-    public void accept(Tester tester) {
-        tester.value(
-            new JdbcTemplate(dataSource)
-                .queryForList(query));
     }
 }

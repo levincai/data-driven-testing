@@ -17,7 +17,7 @@ public class JsonTester {
      *
      * @return
      */
-    public static <T> Load<T> load(Class<T> type) {
+    public static <T> Load<T> load(final Class<T> type) {
         return
             JsonLoad.<T>newBuilder()
                 .type(type)
@@ -57,7 +57,7 @@ public class JsonTester {
      *
      * @return
      */
-    public static Comparison compare(JSONCompareMode compareMode) {
+    public static Comparison compare(final JSONCompareMode compareMode) {
         return new JsonCompare(compareMode);
     }
 }

@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -49,9 +50,9 @@ public class SaveMockEndpointTest extends CamelTestSupport {
             .scenario("consume")
             .begin()
                 .value(Arrays.asList("one", "two"))
-                .apply((Collection<String> col) -> producerTemplate.sendBody(SOURCE, col))
+                .apply((List<String> col) -> producerTemplate.sendBody(SOURCE, col))
                 .script(
-                    CamelTester.<String>saveMockEndpoint()
+                    CamelTester.<List<String>, String>saveMockEndpoint()
                         .mockEndpoint(destination)
                         .fileName("string.txt")
                         .type(String.class)

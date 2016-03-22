@@ -21,7 +21,7 @@ public class JsonSave<I> implements Save<I> {
             objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         }
 
-        public Builder configure(Consumer<ObjectMapper> configurator) {
+        public Builder configure(final Consumer<ObjectMapper> configurator) {
             configurator.accept(objectMapper);
 
             return this;
@@ -38,12 +38,12 @@ public class JsonSave<I> implements Save<I> {
 
     private final ObjectMapper objectMapper;
 
-    private JsonSave(Builder builder) {
+    private JsonSave(final Builder builder) {
         objectMapper = builder.objectMapper;
     }
 
     @Override
-    public void save(I value, OutputStream output) throws IOException {
+    public void save(final I value, final OutputStream output) throws IOException {
         objectMapper.writeValue(output, value);
     }
 }
