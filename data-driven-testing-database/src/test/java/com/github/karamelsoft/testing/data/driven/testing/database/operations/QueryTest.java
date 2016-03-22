@@ -36,7 +36,7 @@ public class QueryTest {
             .dataSource(dataSource)
             .sql("SELECT * FROM TEST")
             .build()
-                .accept(tester);
+                .execute(tester);
 
         final ArgumentCaptor<Object> captor = ArgumentCaptor.forClass(Object.class);
         verify(tester, times(1)).value(captor.capture());
