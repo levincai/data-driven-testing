@@ -1,5 +1,7 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Scenario;
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Script;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.Assertions;
 import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
@@ -32,7 +34,7 @@ public class TestFactoryTest {
                 .scenario(scenarioName)
                 .begin()
                     .value("whatever the value")
-                    .map((String value) -> value.toUpperCase())
+                    .map(String::toUpperCase)
                     .save(fileName, StringTester.save())
                     .compare(fileName, StringTester.compare());
 
@@ -82,7 +84,7 @@ public class TestFactoryTest {
             .scenario("from-file")
             .begin()
                 .load("input.txt", StringTester.load())
-                .map((String value) -> value.toUpperCase())
+                .map(String::toUpperCase)
                 .save("output.txt", StringTester.save())
                 .compare("output.txt", StringTester.compare())
                 .end();
@@ -95,14 +97,12 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("script")
             .begin()
-                .script(
-                    CoreTester.<String, String>script()
-                        .fileName("one.txt")
-                        .load(StringTester.load())
-                        .function(String::toUpperCase)
-                        .save(StringTester.save())
-                        .comparison(StringTester.compare())
-                        .build())
+                .script(tester ->
+                    tester
+                        .load("one.txt", StringTester.load())
+                        .map(String::toUpperCase)
+                        .save("one.txt", StringTester.save())
+                        .compare("one.txt", StringTester.compare()))
                 .end();
     }
 
@@ -113,13 +113,12 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("scenario")
             .begin()
-                .scenario(
-                    CoreTester.<String, String>scenario()
-                        .load(StringTester.load())
-                        .function(String::toUpperCase)
-                        .save(StringTester.save())
-                        .comparison(StringTester.compare())
-                        .build())
+                .scenario((fileName, tester) ->
+                    tester
+                        .load(fileName, StringTester.load())
+                        .map(String::toUpperCase)
+                        .save(fileName, StringTester.save())
+                        .compare(fileName, StringTester.compare()))
                 .end();
     }
 }
