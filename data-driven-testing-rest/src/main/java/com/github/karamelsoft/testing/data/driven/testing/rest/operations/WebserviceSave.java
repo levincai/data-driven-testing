@@ -13,34 +13,34 @@ import java.util.Map;
 /**
  * Created by frederic on 04/07/15.
  */
-public class WebserviceSave<T> implements Save<HttpResponse<?>> {
+public class WebserviceSave<T> implements Save<HttpResponse<T>> {
 
     private final Save<Map<String, Object>> envelopSave;
     private final Load<?> bodyLoad;
 
-    private WebserviceSave(Builder builder) {
+    private WebserviceSave(final Builder builder) {
         envelopSave = JsonTester.save();
         bodyLoad = builder.bodyLoad;
     }
 
-    public static Builder newBuilder() {
-        return new Builder();
+    public static <T> Builder<T> newBuilder() {
+        return new Builder<>();
     }
 
-    public static Builder newBuilder(WebserviceSave copy) {
-        Builder builder = new Builder();
+    public static <T> Builder<T> newBuilder(final WebserviceSave<T> copy) {
+        final Builder builder = new Builder<T>();
         builder.bodyLoad = copy.bodyLoad;
         return builder;
     }
 
     @Override
-    public void save(HttpResponse<?> response, OutputStream output) throws IOException {
+    public void save(final HttpResponse<T> response, final OutputStream output) throws IOException {
         envelopSave.save(
             createMap(response),
             output);
     }
 
-    private Map<String, Object> createMap(HttpResponse<?> response) throws IOException {
+    private Map<String, Object> createMap(final HttpResponse<T> response) throws IOException {
         final Map<String, Object> map = new HashMap<>();
         map.put("headers", response.getHeaders());
         map.put("status", response.getStatus());
@@ -49,19 +49,19 @@ public class WebserviceSave<T> implements Save<HttpResponse<?>> {
         return map;
     }
 
-    public static final class Builder {
+    public static final class Builder<T> {
         private Load<?> bodyLoad;
 
         private Builder() {
         }
 
-        public Builder loadBodyWith(Load<?> val) {
+        public Builder loadBodyWith(final Load<?> val) {
             bodyLoad = val;
             return this;
         }
 
-        public WebserviceSave build() {
-            return new WebserviceSave(this);
+        public WebserviceSave<T> build() {
+            return new WebserviceSave<>(this);
         }
     }
 }
