@@ -7,9 +7,8 @@ public class NoValueException extends RuntimeException {
 
     /**
      *
-     * @param message
      */
-    public NoValueException(String message) {
-        super(message);
+    public NoValueException() {
+        super("The tester has no value, please use value() or load() methods");
     }
 }

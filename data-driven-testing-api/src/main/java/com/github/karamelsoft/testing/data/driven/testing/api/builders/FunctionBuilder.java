@@ -10,8 +10,6 @@ public interface FunctionBuilder<I, O, R> {
     /**
      *
      * @param function
-     * @param <I>
-     * @param <O>
      * @return
      */
     R function(Function<I, O> function);
