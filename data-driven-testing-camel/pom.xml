@@ -19,7 +19,7 @@
     <name>${project.name} :: Camel</name>
 
     <properties>
-        <camel.version>2.14.2</camel.version>
+        <camel.version>2.16.2</camel.version>
     </properties>
 
     <dependencies>
@@ -59,19 +59,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration/>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
