@@ -56,7 +56,15 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration/>
+                        <configuration>
+                            <artifactSet>
+                                <excludes>
+                                    <excluse>org.slf4j:*</excluse>
+                                    <excluse>com.sun.xml.bind:*</excluse>
+                                    <exclude>org.apache.camel:*</exclude>
+                                </excludes>
+                            </artifactSet>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
