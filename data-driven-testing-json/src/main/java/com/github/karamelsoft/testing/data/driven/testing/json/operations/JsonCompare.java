@@ -17,10 +17,10 @@ public class JsonCompare implements Comparison {
     }
 
     @Override
-    public Boolean equivalent(final InputStream resource, final InputStream actual) throws IOException {
+    public Boolean equivalent(final InputStream expected, final InputStream actual) throws IOException {
         try {
             JSONAssert.assertEquals(
-                IOUtils.toString(resource),
+                IOUtils.toString(expected),
                 IOUtils.toString(actual),
                 compareMode);
 
