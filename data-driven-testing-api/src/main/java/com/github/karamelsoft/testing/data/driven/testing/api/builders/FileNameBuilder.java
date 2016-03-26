@@ -1,14 +1,18 @@
 package com.github.karamelsoft.testing.data.driven.testing.api.builders;
 
 /**
- * Created by frederic on 05/06/15.
+ * Internal Interface used to add operation fileName inside a DSL.
+ *
+ * @param <R> is the return type of the operation
+ *
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public interface FileNameBuilder<R> {
 
     /**
-     *
-     * @param fileName
-     * @return
+     * Defines a fileName operation.
+     * @param fileName .
+     * @return the given type R.
      */
     R fileName(String fileName);
 }

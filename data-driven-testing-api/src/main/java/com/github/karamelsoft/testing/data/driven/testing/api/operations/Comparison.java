@@ -4,17 +4,23 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by frederic on 26/04/15.
+ * Interface used to compare 2 different {@link InputStream}.
+ *
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 @FunctionalInterface
 public interface Comparison {
 
     /**
+     * Compares 2 given {@link InputStream}.
      *
-     * @param resource
-     * @param actual
-     * @return
+     * @param expected is the reference {@link InputStream}.
+     * @param actual is the actual {@link InputStream}.
+
+     * @return {@link Boolean#TRUE} if the 2 given {@link InputStream} are equivalent.
+     *         {@link Boolean#FALSE} otherwise.
+
      * @throws IOException
      */
-    Boolean equivalent(InputStream resource, InputStream actual) throws IOException;
+    Boolean equivalent(InputStream expected, InputStream actual) throws IOException;
 }
