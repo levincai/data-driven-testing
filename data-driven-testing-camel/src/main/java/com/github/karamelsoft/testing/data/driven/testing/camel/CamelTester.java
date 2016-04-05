@@ -8,15 +8,10 @@ import java.util.Optional;
 import java.util.function.Function;
 
 /**
- * Created by frederic on 01/05/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class CamelTester {
 
-    /**
-     *
-     * @param <I>
-     * @return
-     */
     public static <I, O> SaveMockEndpoint.Builder<I, O> saveMockEndpoint() {
         return SaveMockEndpoint.newBuilder();
     }

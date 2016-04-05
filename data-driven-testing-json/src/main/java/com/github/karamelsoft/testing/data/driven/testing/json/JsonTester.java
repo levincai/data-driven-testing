@@ -9,14 +9,10 @@ import com.github.karamelsoft.testing.data.driven.testing.json.operations.JsonSa
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 /**
- * Created by frederic on 26/04/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class JsonTester {
 
-    /**
-     *
-     * @return
-     */
     public static <T> Load<T> load(final Class<T> type) {
         return
             JsonLoad.<T>newBuilder()
@@ -24,39 +20,20 @@ public class JsonTester {
                 .build();
     }
 
-    /**
-     *
-     * @param <T>
-     * @return
-     */
     public static <T> JsonLoad.Builder<T> customLoad() {
         return JsonLoad.newBuilder();
     }
 
-    /**
-     *
-     * @param
-     * @return
-     */
     public static <T> Save<T> save() {
         return
             JsonSave.<T>newBuilder()
                 .build();
     }
 
-    /**
-     *
-     * @param <T>
-     * @return
-     */
     public static <T> JsonSave.Builder<T> customSave() {
         return JsonSave.newBuilder();
     }
 
-    /**
-     *
-     * @return
-     */
     public static Comparison compare(final JSONCompareMode compareMode) {
         return new JsonCompare(compareMode);
     }

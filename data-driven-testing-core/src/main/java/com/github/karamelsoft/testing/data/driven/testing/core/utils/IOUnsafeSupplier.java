@@ -3,7 +3,7 @@ package com.github.karamelsoft.testing.data.driven.testing.core.utils;
 import java.io.IOException;
 
 /**
- * Created by frederic on 22/03/16.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public interface IOUnsafeSupplier<O> {
 

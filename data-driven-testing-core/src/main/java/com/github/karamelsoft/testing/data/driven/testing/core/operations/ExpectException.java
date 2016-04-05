@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.function.Consumer;
 
 /**
- * Created by frederic on 08/06/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class ExpectException implements Consumer<Exception> {
 

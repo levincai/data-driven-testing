@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 
 /**
- * Created by frederic on 27/06/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class JsonLoad<O> implements Load<O> {
 

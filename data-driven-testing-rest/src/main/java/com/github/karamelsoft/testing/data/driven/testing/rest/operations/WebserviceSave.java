@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by frederic on 04/07/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class WebserviceSave<T> implements Save<HttpResponse<T>> {
 

@@ -1,16 +1,14 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.RuntimeIOException;
 import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
 import com.github.karamelsoft.testing.data.driven.testing.core.utils.ExceptionUtils;
 
-import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * Created by frederic on 15/03/16.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 class ActiveTester<T> extends AbstractTester<T> {
 

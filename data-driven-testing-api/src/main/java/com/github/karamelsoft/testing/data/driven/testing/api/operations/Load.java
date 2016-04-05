@@ -20,7 +20,7 @@ public interface Load<O> {
      *
      * @return the result of the loading.
      *
-     * @throws IOException
+     * @throws IOException that could occured while loading files.
      */
     O load(InputStream input) throws IOException;
 }

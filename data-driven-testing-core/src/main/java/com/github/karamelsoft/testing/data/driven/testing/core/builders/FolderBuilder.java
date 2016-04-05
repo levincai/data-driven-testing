@@ -1,21 +1,11 @@
 package com.github.karamelsoft.testing.data.driven.testing.core.builders;
 
 /**
- * Created by frederic on 26/04/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public interface FolderBuilder<O> extends Trigger<O> {
 
-    /**
-     *
-     * @param resourceFolderPath
-     * @return
-     */
     FolderBuilder<O> resourcePath(String resourceFolderPath);
 
-    /**
-     *
-     * @param targetFolder
-     * @return
-     */
     FolderBuilder<O> targetPath(String targetFolder);
 }

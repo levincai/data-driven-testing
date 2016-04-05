@@ -4,13 +4,14 @@ import com.github.karamelsoft.testing.data.driven.testing.core.builders.ExpectEx
 import com.github.karamelsoft.testing.data.driven.testing.core.operations.ExpectException;
 
 /**
- * Created by frederic on 26/04/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class CoreTester {
 
     /**
-     * 
-     * @return
+     * Factory method used to define the expected exception.
+     *
+     * @return an instance of {@link ExpectExceptionBuilder}
      */
     public static ExpectExceptionBuilder<ExpectException.Builder> expectException() {
         return ExpectException.newBuilder();

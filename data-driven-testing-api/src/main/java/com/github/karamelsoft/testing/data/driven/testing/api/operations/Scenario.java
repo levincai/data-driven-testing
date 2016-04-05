@@ -6,7 +6,10 @@ import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
  * Interface used to define a test scenario.
  *
  * @param <T> is the type of the {@link Tester} this scenario will be applied to.
+ *
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
+@FunctionalInterface
 public interface Scenario<T> {
 
     /**

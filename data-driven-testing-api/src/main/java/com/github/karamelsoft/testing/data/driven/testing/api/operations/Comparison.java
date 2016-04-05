@@ -19,8 +19,8 @@ public interface Comparison {
 
      * @return {@link Boolean#TRUE} if the 2 given {@link InputStream} are equivalent.
      *         {@link Boolean#FALSE} otherwise.
-
-     * @throws IOException
+     *
+     * @throws IOException that could occured while comparing files.
      */
     Boolean equivalent(InputStream expected, InputStream actual) throws IOException;
 }

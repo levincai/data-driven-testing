@@ -11,9 +11,9 @@ package com.github.karamelsoft.testing.data.driven.testing.api.builders;
 public interface TypeBuilder<T, R> {
 
     /**
-     *
-     * @param type
-     * @return
+     * Method used to define a type.
+     * @param type to define.
+     * @return the generic type R.
      */
     R type(Class<T> type);
 }

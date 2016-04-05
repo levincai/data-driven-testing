@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by frederic on 03/06/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class Execute implements Runnable {
 
