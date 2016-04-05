@@ -41,7 +41,6 @@ public class XmlCompare implements Comparison {
     }
 
 
-
     public XmlCompare(XmlComparisonMode comparisonMode) {
         this.comparisonMode = comparisonMode;
     }

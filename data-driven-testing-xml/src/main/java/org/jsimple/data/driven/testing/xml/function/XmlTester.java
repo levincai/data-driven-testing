@@ -3,8 +3,6 @@ package org.jsimple.data.driven.testing.xml.function;
 import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Load;
 import org.jsimple.data.driven.testing.api.structure.Save;
-import org.xmlunit.diff.ComparisonResult;
-import org.xmlunit.matchers.CompareMatcher;
 
 /**
  * Created by Jonathan Schoreels on 26/04/15.
@@ -12,7 +10,6 @@ import org.xmlunit.matchers.CompareMatcher;
 public class XmlTester {
 
     /**
-     *
      * @return
      */
     public static <T> Load<T> load(Class<T> type) {
@@ -23,7 +20,6 @@ public class XmlTester {
     }
 
     /**
-     *
      * @param <T>
      * @return
      */
@@ -32,7 +28,6 @@ public class XmlTester {
     }
 
     /**
-     *
      * @param
      * @return
      */
@@ -43,7 +38,6 @@ public class XmlTester {
     }
 
     /**
-     *
      * @param <T>
      * @return
      */
@@ -52,7 +46,6 @@ public class XmlTester {
     }
 
     /**
-     *
      * @return
      */
     public static Comparison compare(XmlComparisonMode mode) {
