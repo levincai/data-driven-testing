@@ -1,0 +1,7 @@
+{
+  "headers" : {
+    "transfer-encoding" : [ "chunked" ]
+  },
+  "body" : "response from mocked server",
+  "status" : 200
+}
