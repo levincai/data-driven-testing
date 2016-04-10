@@ -11,7 +11,7 @@
     <parent>
         <groupId>com.github.karamelsoft.testing</groupId>
         <artifactId>data-driven-testing</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>data-driven-testing-database</artifactId>
