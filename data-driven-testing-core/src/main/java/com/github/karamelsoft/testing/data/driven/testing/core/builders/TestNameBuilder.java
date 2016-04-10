@@ -5,10 +5,5 @@ package com.github.karamelsoft.testing.data.driven.testing.core.builders;
  */
 public interface TestNameBuilder<O> {
 
-    /**
-     * Defines test name
-     * @param testName
-     * @return
-     */
     O name(String testName);
 }
