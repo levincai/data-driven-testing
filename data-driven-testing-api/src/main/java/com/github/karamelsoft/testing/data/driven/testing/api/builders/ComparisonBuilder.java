@@ -13,7 +13,7 @@ public interface ComparisonBuilder<R> {
 
     /**
      * Defines a comparison operation.
-     * @param comparison
+     * @param comparison to use.
      * @return the given type R.
      */
     R comparison(Comparison comparison);

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by frederic on 03/06/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class Query implements Script<Object, List<Map<String, Object>>> {
 

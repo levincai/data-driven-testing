@@ -19,7 +19,7 @@ public interface Save<I> {
      * @param value is the value to save.
      * @param output is the {@link OutputStream} which the value will be saved to.
      *
-     * @throws IOException
+     * @throws IOException that could occured while reading files.
      */
     void save(I value, OutputStream output) throws IOException;
 }

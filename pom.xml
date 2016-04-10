@@ -10,9 +10,14 @@
     
     <groupId>com.github.karamelsoft.testing</groupId>
     <artifactId>data-driven-testing</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>pom</packaging>
+
     <name>${project.name}</name>
+    <description>
+        Modular extensible Test Framework
+    </description>
+    <url>https://github.com/karamelsoft/data-driven-testing</url>
     
     <properties>
         <project.name>Data Driven Testing</project.name>
@@ -20,7 +25,7 @@
         <java.version>1.8</java.version>
         <commons-io.version>2.4</commons-io.version>
         <maven-compiler-plugin>3.2</maven-compiler-plugin>
-        <maven-shade-plugin.version>2.3</maven-shade-plugin.version>
+        <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
         <maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.10.8</mockito.version>
@@ -110,7 +115,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-            
+
     <modules>
         <module>data-driven-testing-api</module>
         <module>data-driven-testing-core</module>
@@ -118,8 +123,38 @@
         <module>data-driven-testing-json</module>
         <module>data-driven-testing-database</module>
         <module>data-driven-testing-rest</module>
-        <module>data-driven-testing-all</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                            <configuration/>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     <profiles>
         <profile>

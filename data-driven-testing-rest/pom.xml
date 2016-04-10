@@ -11,7 +11,7 @@
     <parent>
         <groupId>com.github.karamelsoft.testing</groupId>
         <artifactId>data-driven-testing</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
 
     <artifactId>data-driven-testing-rest</artifactId>
@@ -72,12 +72,27 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <excludes>
+                                    <excluse>${project.groupId}:data-driven-testing-api</excluse>
+                                    <excluse>${project.groupId}:data-driven-testing-core</excluse>
+                                    <excluse>${project.groupId}:data-driven-testing-json</excluse>
+                                </excludes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

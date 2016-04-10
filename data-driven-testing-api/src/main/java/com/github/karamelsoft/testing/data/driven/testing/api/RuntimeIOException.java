@@ -4,6 +4,8 @@ import java.io.IOException;
 
 /**
  * Runtime exception used to wrap {@link IOException}.
+ *
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class RuntimeIOException extends RuntimeException {
 

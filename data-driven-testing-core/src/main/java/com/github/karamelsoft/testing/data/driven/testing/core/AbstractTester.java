@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by frederic on 25/04/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 abstract class AbstractTester<T> implements Tester<T> {
 

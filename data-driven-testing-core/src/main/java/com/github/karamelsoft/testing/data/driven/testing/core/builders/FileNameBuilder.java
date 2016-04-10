@@ -1,14 +1,9 @@
 package com.github.karamelsoft.testing.data.driven.testing.core.builders;
 
 /**
- * Created by frederic on 07/07/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public interface FileNameBuilder<O> {
 
-    /**
-     *
-     * @param fileName
-     * @return
-     */
     O fileName(String fileName);
 }

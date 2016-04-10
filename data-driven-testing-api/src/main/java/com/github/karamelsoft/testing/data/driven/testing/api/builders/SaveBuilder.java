@@ -15,7 +15,7 @@ public interface SaveBuilder<I, R> {
     /**
      * Defines a save operation.
      * @param save is the strategy to execute.
-     * @return
+     * @return the given type R.
      */
     R save(Save<I> save);
 }

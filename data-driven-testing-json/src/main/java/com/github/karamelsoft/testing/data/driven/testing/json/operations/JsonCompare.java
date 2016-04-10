@@ -8,6 +8,9 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
+ */
 public class JsonCompare implements Comparison {
 
     private final JSONCompareMode compareMode;

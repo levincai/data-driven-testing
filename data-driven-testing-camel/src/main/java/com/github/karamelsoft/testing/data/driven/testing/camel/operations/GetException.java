@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 /**
- * Created by frederic on 08/06/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public class GetException implements Function<Exchange, Optional<Exception>> {
 

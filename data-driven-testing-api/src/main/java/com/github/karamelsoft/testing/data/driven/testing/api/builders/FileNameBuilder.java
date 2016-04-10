@@ -11,7 +11,7 @@ public interface FileNameBuilder<R> {
 
     /**
      * Defines a fileName operation.
-     * @param fileName .
+     * @param fileName to use.
      * @return the given type R.
      */
     R fileName(String fileName);

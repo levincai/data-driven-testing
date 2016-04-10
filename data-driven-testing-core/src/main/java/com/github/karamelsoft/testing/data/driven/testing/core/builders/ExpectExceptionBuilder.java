@@ -1,7 +1,7 @@
 package com.github.karamelsoft.testing.data.driven.testing.core.builders;
 
 /**
- * Created by frederic on 09/06/15.
+ * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
 public interface ExpectExceptionBuilder<B>
     extends
