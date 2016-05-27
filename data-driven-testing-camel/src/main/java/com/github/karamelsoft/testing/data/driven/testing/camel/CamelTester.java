@@ -1,8 +1,10 @@
 package com.github.karamelsoft.testing.data.driven.testing.camel;
 
+import com.github.karamelsoft.testing.data.driven.testing.camel.operations.AssertIsVerified;
 import com.github.karamelsoft.testing.data.driven.testing.camel.operations.GetException;
 import com.github.karamelsoft.testing.data.driven.testing.camel.operations.SaveMockEndpoint;
 import org.apache.camel.Exchange;
+import org.apache.camel.component.mock.MockEndpoint;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -12,7 +14,11 @@ import java.util.function.Function;
  */
 public class CamelTester {
 
-    public static <I, O> SaveMockEndpoint.Builder<I, O> saveMockEndpoint() {
+    public static Runnable assertIsVerified(MockEndpoint mockEndpoint) {
+        return new AssertIsVerified(mockEndpoint);
+    }
+
+    public static <T, I> SaveMockEndpoint.Builder<T, I> saveMockEndpoint() {
         return SaveMockEndpoint.newBuilder();
     }
 

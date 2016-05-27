@@ -32,7 +32,7 @@ public class Execute implements Runnable {
         }
 
         @Override
-        public Builder sql(final String order) {
+        public Builder order(final String order) {
             orders.add(order);
             return this;
         }

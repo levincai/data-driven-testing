@@ -1,10 +1,8 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.operations.Scenario;
-import com.github.karamelsoft.testing.data.driven.testing.api.operations.Script;
+import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.Assertions;
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -97,12 +95,13 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("script")
             .begin()
-                .script(tester ->
+                .script(tester -> {
                     tester
                         .load("one.txt", StringTester.load())
                         .map(String::toUpperCase)
                         .save("one.txt", StringTester.save())
-                        .compare("one.txt", StringTester.compare()))
+                        .compare("one.txt", StringTester.compare());
+                })
                 .end();
     }
 

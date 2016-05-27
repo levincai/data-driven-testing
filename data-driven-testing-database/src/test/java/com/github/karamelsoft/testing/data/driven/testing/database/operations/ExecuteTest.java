@@ -21,14 +21,14 @@ public class ExecuteTest {
         final BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl(
-            "jdbc:h2:mem:query;" +
+            "jdbc:h2:mem:order;" +
                 "INIT=" +
                 "RUNSCRIPT FROM 'classpath:database/create.sql'");
 
         DatabaseTester.execute()
             .dataSource(dataSource)
-            .sql("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('John', 'Doe')")
-            .sql("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('Johnathan', 'Smith')")
+            .order("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('John', 'Doe')")
+            .order("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('Johnathan', 'Smith')")
             .build()
                 .run();
 
