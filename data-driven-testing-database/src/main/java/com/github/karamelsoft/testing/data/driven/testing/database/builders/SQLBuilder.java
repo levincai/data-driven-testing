@@ -5,5 +5,5 @@ package com.github.karamelsoft.testing.data.driven.testing.database.builders;
  */
 public interface SQLBuilder<R> {
 
-    R sql(String order);
+    R order(String order);
 }

@@ -5,34 +5,34 @@ import com.github.karamelsoft.testing.data.driven.testing.api.builders.FileNameB
 import com.github.karamelsoft.testing.data.driven.testing.api.builders.SaveBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.api.builders.TypeBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
-import com.github.karamelsoft.testing.data.driven.testing.api.operations.Script;
 import com.github.karamelsoft.testing.data.driven.testing.camel.builders.MockEndpointBuilder;
 import org.apache.camel.Exchange;
 import org.apache.camel.component.mock.MockEndpoint;
 
 import java.text.MessageFormat;
+import java.util.function.Consumer;
 
 /**
  * Created by frederic on 01/05/15.
  */
-public class SaveMockEndpoint<I, O> implements Script<I, I> {
+public class SaveMockEndpoint<T, I> implements Consumer<Tester<T>> {
 
     //--------------------------------------------------------------------------
     // Private fields
     //--------------------------------------------------------------------------
     private final MockEndpoint mockEndpoint;
-    private final Class<O>     type;
+    private final Class<I>     type;
     private final String       fileName;
-    private final Save<O>      save;
+    private final Save<I>      save;
 
-    private SaveMockEndpoint(final Builder builder) {
+    private SaveMockEndpoint(final Builder<T, I> builder) {
         mockEndpoint    = builder.mockEndpoint;
         type            = builder.type;
         fileName        = builder.fileName;
         save            = builder.save;
     }
 
-    public static <I, O> Builder<I, O> newBuilder() {
+    public static <T, I> Builder<T, I> newBuilder() {
         return new Builder<>();
     }
 
@@ -40,59 +40,57 @@ public class SaveMockEndpoint<I, O> implements Script<I, I> {
     // Public methods
     //--------------------------------------------------------------------------
     @Override
-    public Tester<I> execute(final Tester<I> tester) {
+    public void accept(Tester<T> tester) {
 
         Integer index = 0;
-        for (final Exchange exchange : mockEndpoint.getExchanges()) {
+        for (final Exchange exchange : mockEndpoint.getReceivedExchanges()) {
             tester
                 .value(exchange.getIn().getBody(type))
                 .save(
                     MessageFormat.format("{0}-{1}", index++, fileName),
                     save);
         }
-
-        return tester;
     }
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
-    public static final class Builder<I, O>
+    public static final class Builder<T, I>
         implements
-            MockEndpointBuilder<FileNameBuilder<TypeBuilder<O, SaveBuilder<O, Builder<I, O>>>>>,
-            FileNameBuilder<TypeBuilder<O, SaveBuilder<O, Builder<I, O>>>>,
-            TypeBuilder<O, SaveBuilder<O, Builder<I, O>>>,
-            SaveBuilder<O, Builder<I, O>> {
+            MockEndpointBuilder<FileNameBuilder<TypeBuilder<I, SaveBuilder<I, Builder<T, I>>>>>,
+            FileNameBuilder<TypeBuilder<I, SaveBuilder<I, Builder<T, I>>>>,
+            TypeBuilder<I, SaveBuilder<I, Builder<T, I>>>,
+            SaveBuilder<I, Builder<T, I>> {
 
         private MockEndpoint    mockEndpoint;
-        private Class<O>        type;
+        private Class<I>        type;
         private String          fileName;
-        private Save<O>         save;
+        private Save<I>         save;
 
         private Builder() {
         }
 
-        public FileNameBuilder<TypeBuilder<O, SaveBuilder<O, Builder<I, O>>>> mockEndpoint(final MockEndpoint mockEndpoint) {
+        public FileNameBuilder<TypeBuilder<I, SaveBuilder<I, Builder<T, I>>>> mockEndpoint(final MockEndpoint mockEndpoint) {
             this.mockEndpoint = mockEndpoint;
 
             return this;
         }
 
-        public TypeBuilder<O, SaveBuilder<O, Builder<I, O>>> fileName(final String fileName) {
+        public TypeBuilder<I, SaveBuilder<I, Builder<T, I>>> fileName(final String fileName) {
             this.fileName = fileName;
             return this;
         }
 
-        public SaveBuilder<O, Builder<I, O>> type(final Class<O> type) {
+        public SaveBuilder<I, Builder<T, I>> type(final Class<I> type) {
             this.type = type;
             return this;
         }
 
-        public Builder<I, O> save(final Save<O> save) {
+        public Builder<T, I> save(final Save<I> save) {
             this.save = save;
             return this;
         }
 
-        public SaveMockEndpoint<I, O> build() {
+        public SaveMockEndpoint<T, I> build() {
             return new SaveMockEndpoint<>(this);
         }
     }

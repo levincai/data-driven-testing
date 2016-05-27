@@ -11,7 +11,7 @@
     <parent>
         <groupId>com.github.karamelsoft.testing</groupId>
         <artifactId>data-driven-testing</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
     </parent>
 
     <artifactId>data-driven-testing-json</artifactId>
@@ -70,6 +70,10 @@
                         </goals>
                         <configuration>
                             <artifactSet>
+                                <includes>
+                                    <include>org.skyscreamer:jsonassert</include>
+                                    <include>org.json:*</include>
+                                </includes>
                                 <excludes>
                                     <excluse>${project.groupId}:data-driven-testing-api</excluse>
                                     <excluse>${project.groupId}:data-driven-testing-core</excluse>

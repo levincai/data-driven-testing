@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -98,7 +99,7 @@ abstract class AbstractTester<T> implements Tester<T> {
     }
 
     @Override
-    public <T> Tester load(final String fileName, final Load<T> strategy) {
+    public <T> Tester<T> load(final String fileName, final Load<T> strategy) {
         try (final InputStream inputStream = readFromResource(fileName)) {
             return
                 new ActiveTester<>(
@@ -111,7 +112,7 @@ abstract class AbstractTester<T> implements Tester<T> {
     }
 
     @Override
-    public Tester compare(final String fileName, final Comparison strategy) {
+    public Tester<T> compare(final String fileName, final Comparison strategy) {
 
         Boolean errors = false;
 
@@ -142,6 +143,13 @@ abstract class AbstractTester<T> implements Tester<T> {
                         true));
             }
         }
+    }
+
+    @Override
+    public Tester<T> script(Consumer<Tester<T>> script) {
+        script.accept(this);
+
+        return this;
     }
 
     @Override
