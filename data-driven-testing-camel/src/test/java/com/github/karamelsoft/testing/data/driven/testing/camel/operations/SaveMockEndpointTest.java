@@ -1,9 +1,11 @@
 package com.github.karamelsoft.testing.data.driven.testing.camel.operations;
 
 import com.github.karamelsoft.testing.data.driven.testing.camel.CamelTester;
-import com.github.karamelsoft.testing.data.driven.testing.core.TestFactory;
 import com.github.karamelsoft.testing.data.driven.testing.core.StringTester;
-import org.apache.camel.*;
+import com.github.karamelsoft.testing.data.driven.testing.core.TestFactory;
+import org.apache.camel.EndpointInject;
+import org.apache.camel.Produce;
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
@@ -14,8 +16,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by frederic on 02/05/15.

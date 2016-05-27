@@ -76,6 +76,13 @@ public interface Tester<T> {
     }
 
     /**
+     * Execute a given consumer on the current Tester.
+     * @param script {@link Consumer}
+     * @return current Tester instance.
+     */
+    Tester<T> script(Consumer<Tester<T>> script);
+
+    /**
      * Execute a given script on the current Tester.
      * @param <U> new Tester value type.
      * @param script to execute.

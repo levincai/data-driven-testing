@@ -1,7 +1,7 @@
 package com.github.karamelsoft.testing.data.driven.testing.database;
 
 import com.github.karamelsoft.testing.data.driven.testing.database.operations.Execute;
-import com.github.karamelsoft.testing.data.driven.testing.database.operations.Query;
+import com.github.karamelsoft.testing.data.driven.testing.database.operations.Export;
 
 /**
  * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
@@ -12,7 +12,7 @@ public class DatabaseTester {
         return Execute.newBuilder();
     }
 
-    public static Query.Builder query() {
-        return Query.newBuilder();
+    public static <T> Export.Builder<T> export() {
+        return Export.newBuilder();
     }
 }
