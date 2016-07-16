@@ -9,11 +9,15 @@ import java.io.IOException;
  */
 public class RuntimeIOException extends RuntimeException {
 
+    public RuntimeIOException(final String message) {
+        super(message);
+    }
+
     /**
      * Constructor used to construct this exception
      * @param cause is the {@link IOException} to wrap.
      */
-    public RuntimeIOException(IOException cause) {
+    public RuntimeIOException(final IOException cause) {
         super(cause);
     }
 }

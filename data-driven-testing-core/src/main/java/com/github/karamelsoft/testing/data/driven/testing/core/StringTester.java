@@ -1,9 +1,9 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
-import org.apache.commons.io.IOUtils;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Comparison;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Load;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
+import org.apache.commons.io.IOUtils;
 
 /**
  * @author Frédéric Gendebien (frederic.gendebien@gmail.com)

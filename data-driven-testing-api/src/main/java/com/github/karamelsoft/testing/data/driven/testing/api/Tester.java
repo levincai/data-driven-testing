@@ -98,6 +98,13 @@ public interface Tester<T> {
     Tester<T> scenario(Scenario<T> scenario);
 
     /**
+     * Execute a given scenario for each folder.
+     * @param scenario {@link Consumer} to execute.
+     * @return the current Tester instance.
+     */
+    Tester<T> scenario(Consumer<Tester<?>> scenario);
+
+    /**
      * Finish the test asserting that no errors happened
      */
     void end();

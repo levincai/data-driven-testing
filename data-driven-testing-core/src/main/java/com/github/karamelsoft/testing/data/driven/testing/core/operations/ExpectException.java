@@ -1,8 +1,8 @@
 package com.github.karamelsoft.testing.data.driven.testing.core.operations;
 
-import org.assertj.core.api.Assertions;
 import com.github.karamelsoft.testing.data.driven.testing.core.builders.CausedByBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.core.builders.ExpectExceptionBuilder;
+import org.assertj.core.api.Assertions;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
