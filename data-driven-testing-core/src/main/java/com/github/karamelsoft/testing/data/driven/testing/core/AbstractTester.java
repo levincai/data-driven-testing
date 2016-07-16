@@ -233,7 +233,9 @@ abstract class AbstractTester<T> implements Tester<T> {
     }
 
     protected InputStream createInputStream(final File file) throws FileNotFoundException {
-        return new FileInputStream(file);
+        return
+            new BufferedInputStream(
+                new FileInputStream(file));
     }
 
     protected OutputStream createOutputStream(final File file) throws FileNotFoundException {
