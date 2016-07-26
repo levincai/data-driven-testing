@@ -1,11 +1,10 @@
 package com.github.karamelsoft.testing.data.driven.testing.rest.operations;
 
-import com.github.karamelsoft.testing.data.driven.testing.core.TestFactory;
 import com.github.karamelsoft.testing.data.driven.testing.core.StringTester;
+import com.github.karamelsoft.testing.data.driven.testing.core.TestFactory;
 import com.github.karamelsoft.testing.data.driven.testing.json.JsonTester;
 import com.github.karamelsoft.testing.data.driven.testing.rest.WebserviceTester;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import org.junit.Rule;
 import org.junit.Test;

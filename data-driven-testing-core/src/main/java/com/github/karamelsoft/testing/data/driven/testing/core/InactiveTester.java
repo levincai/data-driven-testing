@@ -4,7 +4,6 @@ import com.github.karamelsoft.testing.data.driven.testing.api.NoValueException;
 import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
 
-import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -15,22 +14,22 @@ public class InactiveTester<T>
     extends AbstractTester<T>
     implements Tester<T> {
 
-    protected InactiveTester(final Builder builder) throws IOException {
+    protected InactiveTester(final Builder<?> builder) {
         super(builder);
     }
 
     @Override
-    public <U> Tester<U> map(Function<T, U> function) {
+    public <U> Tester<U> map(final Function<T, U> function) {
         throw new NoValueException();
     }
 
     @Override
-    public Tester<T> apply(Consumer<T> consumer) {
+    public Tester<T> apply(final Consumer<T> consumer) {
         throw new NoValueException();
     }
 
     @Override
-    public Tester<T> save(String fileName, Save<T> strategy) {
+    public Tester<T> save(final String fileName, final Save<T> strategy) {
         throw new NoValueException();
     }
 }

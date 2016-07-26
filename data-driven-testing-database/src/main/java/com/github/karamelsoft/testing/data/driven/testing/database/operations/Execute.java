@@ -1,7 +1,7 @@
 package com.github.karamelsoft.testing.data.driven.testing.database.operations;
 
-import com.github.karamelsoft.testing.data.driven.testing.database.builders.SQLBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.database.builders.DataSourceBuilder;
+import com.github.karamelsoft.testing.data.driven.testing.database.builders.SQLBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;

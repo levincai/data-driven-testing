@@ -106,11 +106,11 @@ public class TestFactoryTest {
     }
 
     @Test
-    public void testScenario() throws IOException {
+    public void testSimpleScenario() throws IOException {
 
         TestFactory.createTest()
             .name(TEST_NAME)
-            .scenario("scenario")
+            .scenario("simple-scenario")
             .begin()
                 .scenario((fileName, tester) ->
                     tester
@@ -118,6 +118,27 @@ public class TestFactoryTest {
                         .map(String::toUpperCase)
                         .save(fileName, StringTester.save())
                         .compare(fileName, StringTester.compare()))
+                .end();
+    }
+
+    @Test
+    public void testComplexScenario() throws IOException {
+
+        TestFactory.createTest()
+            .name(TEST_NAME)
+            .scenario("complex-scenario")
+            .begin()
+                .scenario(tester ->
+                    tester
+                        .load("headers.txt", StringTester.load())
+                        .map(String::toUpperCase)
+                        .save("headers.txt", StringTester.save())
+                        .compare("headers.txt", StringTester.compare())
+                        .load("body.txt", StringTester.load())
+                        .map(String::toUpperCase)
+                        .save("body.txt", StringTester.save())
+                        .compare("body.txt", StringTester.compare())
+                        .end())
                 .end();
     }
 }
