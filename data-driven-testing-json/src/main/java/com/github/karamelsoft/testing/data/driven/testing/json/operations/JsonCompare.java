@@ -1,7 +1,7 @@
 package com.github.karamelsoft.testing.data.driven.testing.json.operations;
 
-import org.apache.commons.io.IOUtils;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Comparison;
+import org.apache.commons.io.IOUtils;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 

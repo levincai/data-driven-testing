@@ -40,7 +40,7 @@ public class SaveMockEndpoint<T, I> implements Consumer<Tester<T>> {
     // Public methods
     //--------------------------------------------------------------------------
     @Override
-    public void accept(Tester<T> tester) {
+    public void accept(final Tester<T> tester) {
 
         Integer index = 0;
         for (final Exchange exchange : mockEndpoint.getReceivedExchanges()) {

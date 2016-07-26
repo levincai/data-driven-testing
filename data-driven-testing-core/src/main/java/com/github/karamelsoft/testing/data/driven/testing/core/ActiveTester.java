@@ -14,8 +14,8 @@ class ActiveTester<T> extends AbstractTester<T> {
 
     private final T value;
 
-    ActiveTester(final AbstractTester<?> builder, T value) {
-        super(builder);
+    ActiveTester(final AbstractTester<?> activeTester, final T value) {
+        super(activeTester);
 
         this.value = value;
     }
@@ -40,7 +40,7 @@ class ActiveTester<T> extends AbstractTester<T> {
         ExceptionUtils.toRuntime(() ->
             strategy.save(
                 value,
-                writeIntoTarget(fileName)));
+                createOutputStream(outputTarget(fileName))));
 
         return this;
     }

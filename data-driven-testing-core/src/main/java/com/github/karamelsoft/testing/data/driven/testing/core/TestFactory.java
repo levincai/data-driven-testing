@@ -16,6 +16,6 @@ public class TestFactory {
      * @return an instance of {@link TesterBuilder}.
      */
     public static <T> TesterBuilder<T> createTest() {
-        return AbstractTester.createTest();
+        return AbstractTester.newBuilder();
     }
 }

@@ -13,10 +13,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by frederic on 14/03/16.
