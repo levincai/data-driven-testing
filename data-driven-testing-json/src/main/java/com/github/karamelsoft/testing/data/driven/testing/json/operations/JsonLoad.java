@@ -19,6 +19,7 @@ public class JsonLoad<O> implements Load<O> {
 
         private Builder() {
             objectMapper = new ObjectMapper();
+            objectMapper.findAndRegisterModules();
         }
 
         public Builder configure(final Consumer<ObjectMapper> configurator) {

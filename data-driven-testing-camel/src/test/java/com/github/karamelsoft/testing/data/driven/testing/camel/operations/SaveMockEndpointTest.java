@@ -55,7 +55,6 @@ public class SaveMockEndpointTest extends CamelTestSupport {
                     CamelTester.<List<String>, String>saveMockEndpoint()
                         .mockEndpoint(destination)
                         .fileName("string.txt")
-                        .type(String.class)
                         .save(StringTester.save())
                         .build())
                 .compare("0-string.txt", StringTester.compare())

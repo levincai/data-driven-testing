@@ -19,7 +19,7 @@
     <name>${project.name} :: Camel</name>
 
     <properties>
-        <camel.version>2.16.2</camel.version>
+        <camel.version>2.18.2</camel.version>
     </properties>
 
     <dependencies>

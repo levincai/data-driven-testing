@@ -19,8 +19,8 @@
     <name>${project.name} :: Json</name>
 
     <properties>
-        <jsonassert.version>1.2.3</jsonassert.version>
-        <jackson.version>2.4.3</jackson.version>
+        <jsonassert.version>1.4.0</jsonassert.version>
+        <jackson.version>2.8.6</jackson.version>
     </properties>
 
     <dependencies>

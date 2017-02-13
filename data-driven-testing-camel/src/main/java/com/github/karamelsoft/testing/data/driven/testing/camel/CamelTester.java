@@ -18,7 +18,7 @@ public class CamelTester {
         return new AssertIsVerified(mockEndpoint);
     }
 
-    public static <T, I> SaveMockEndpoint.Builder<T, I> saveMockEndpoint() {
+    public static <T, U> SaveMockEndpoint.Dsl<T, U> saveMockEndpoint() {
         return SaveMockEndpoint.newBuilder();
     }
 

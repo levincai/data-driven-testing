@@ -18,6 +18,7 @@ public class JsonSave<I> implements Save<I> {
 
         private Builder() {
             objectMapper = new ObjectMapper();
+            objectMapper.findAndRegisterModules();
             objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         }
 
