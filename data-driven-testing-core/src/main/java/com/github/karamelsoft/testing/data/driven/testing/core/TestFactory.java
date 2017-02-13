@@ -1,6 +1,6 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
+import com.github.karamelsoft.testing.data.driven.testing.api.ActiveTester;
 import com.github.karamelsoft.testing.data.driven.testing.core.builders.TesterBuilder;
 
 /**
@@ -9,13 +9,11 @@ import com.github.karamelsoft.testing.data.driven.testing.core.builders.TesterBu
 public class TestFactory {
 
     /**
-     * Factory method used to create a {@link Tester}.
-     *
-     * @param <T> type of the {@link Tester}.
+     * Factory method used to create a {@link ActiveTester}.
      *
      * @return an instance of {@link TesterBuilder}.
      */
-    public static <T> TesterBuilder<T> createTest() {
+    public static TesterBuilder createTest() {
         return AbstractTester.newBuilder();
     }
 }

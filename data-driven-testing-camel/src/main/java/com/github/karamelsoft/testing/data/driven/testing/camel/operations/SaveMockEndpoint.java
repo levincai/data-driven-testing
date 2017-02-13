@@ -1,6 +1,6 @@
 package com.github.karamelsoft.testing.data.driven.testing.camel.operations;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
+import com.github.karamelsoft.testing.data.driven.testing.api.ActiveTester;
 import com.github.karamelsoft.testing.data.driven.testing.api.builders.FileNameBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.api.builders.SaveBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.api.builders.TypeBuilder;
@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 /**
  * Created by frederic on 01/05/15.
  */
-public class SaveMockEndpoint<T, I> implements Consumer<Tester<T>> {
+public class SaveMockEndpoint<T, I> implements Consumer<ActiveTester<T>> {
 
     //--------------------------------------------------------------------------
     // Private fields
@@ -40,7 +40,7 @@ public class SaveMockEndpoint<T, I> implements Consumer<Tester<T>> {
     // Public methods
     //--------------------------------------------------------------------------
     @Override
-    public void accept(final Tester<T> tester) {
+    public void accept(final ActiveTester<T> tester) {
 
         Integer index = 0;
         for (final Exchange exchange : mockEndpoint.getReceivedExchanges()) {

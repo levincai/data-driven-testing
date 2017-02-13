@@ -1,6 +1,6 @@
 package com.github.karamelsoft.testing.data.driven.testing.database.operations;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
+import com.github.karamelsoft.testing.data.driven.testing.api.ActiveTester;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
-public class Export<T> implements Consumer<Tester<T>> {
+public class Export<T> implements Consumer<ActiveTester<T>> {
 
     private final DataSource dataSource;
     private final String query;
@@ -38,7 +38,7 @@ public class Export<T> implements Consumer<Tester<T>> {
     }
 
     @Override
-    public void accept(final Tester<T> tTester) {
+    public void accept(final ActiveTester<T> tTester) {
         tTester
             .value(
                 (Object)

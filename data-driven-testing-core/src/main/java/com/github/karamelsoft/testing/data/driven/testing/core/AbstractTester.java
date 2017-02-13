@@ -1,12 +1,7 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.NoScenarioException;
-import com.github.karamelsoft.testing.data.driven.testing.api.RuntimeIOException;
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
-import com.github.karamelsoft.testing.data.driven.testing.api.operations.Comparison;
+import com.github.karamelsoft.testing.data.driven.testing.api.*;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Load;
-import com.github.karamelsoft.testing.data.driven.testing.api.operations.Scenario;
-import com.github.karamelsoft.testing.data.driven.testing.api.operations.Script;
 import com.github.karamelsoft.testing.data.driven.testing.core.builders.FolderBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.core.builders.ScenarioNameBuilder;
 import com.github.karamelsoft.testing.data.driven.testing.core.builders.TesterBuilder;
@@ -19,14 +14,14 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Frédéric Gendebien (frederic.gendebien@gmail.com)
  */
-abstract class AbstractTester<T> implements Tester<T> {
+abstract class AbstractTester implements Tester {
 
     //--------------------------------------------------------------------------
     // Private constants
@@ -55,12 +50,12 @@ abstract class AbstractTester<T> implements Tester<T> {
     //--------------------------------------------------------------------------
     // Constructor
     //--------------------------------------------------------------------------
-    public static <T> Builder<T> newBuilder() {
-        return new Builder<>();
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
-    public static <T> Builder<T> newBuilder(final AbstractTester<?> abstractTester) {
-        final Builder<T> builder = new Builder<>();
+    public static Builder newBuilder(final AbstractTester abstractTester) {
+        final Builder builder = new Builder();
         builder.name(abstractTester.name);
         builder.scenario(abstractTester.scenario);
         builder.resourcePath(abstractTester.resourcePath);
@@ -74,7 +69,7 @@ abstract class AbstractTester<T> implements Tester<T> {
     //-------------------------------------------------------------------------
     // Constructor
     //--------------------------------------------------------------------------
-    protected AbstractTester(final Builder<?> builder) {
+    protected AbstractTester(final Builder builder) {
         name            = builder.name;
         scenario        = builder.scenario;
         resourcePath    = builder.resourcePath.orElse(DEFAULT_RESOURCE_FOLDER);
@@ -92,7 +87,7 @@ abstract class AbstractTester<T> implements Tester<T> {
         prepareFolders();
     }
 
-    protected AbstractTester(final AbstractTester<?> prototype) {
+    protected AbstractTester(final AbstractTester prototype) {
         name                = prototype.name;
         scenario            = prototype.scenario;
         resourcePath        = prototype.resourcePath;
@@ -109,98 +104,21 @@ abstract class AbstractTester<T> implements Tester<T> {
     // Public methods
     //--------------------------------------------------------------------------
     @Override
-    public <U> Tester<U> value(final U value) {
-        return new ActiveTester<>(this, value);
+    public <U> ActiveTester<U> value(final U value) {
+        return new DefaultActiveTester<>(this, value);
     }
 
     @Override
-    public <T> Tester<T> load(final String fileName, final Load<T> strategy) {
+    public <T> ActiveTester<T> load(final String fileName, final Load<T> strategy) {
         try (final InputStream inputStream = createInputStream(inputResource(fileName))) {
             return
-                new ActiveTester<>(
+                new DefaultActiveTester(
                     this,
                     strategy.load(inputStream));
         }
         catch (final IOException e) {
             throw new RuntimeIOException(e);
         }
-    }
-
-    @Override
-    public Tester<T> compare(final String fileName, final Comparison strategy) {
-
-        Boolean errors = false;
-
-        final File targetFile = outputTarget(fileName);
-        try (
-            final InputStream target    = createInputStream(targetFile);
-            final InputStream resource  = createInputStream(outputResource(fileName))) {
-
-            errors =
-                !strategy.equivalent(
-                    resource,
-                    target);
-
-            return this;
-        }
-        catch (final Throwable e) {
-            errors = true;
-
-            return this;
-        }
-        finally {
-            if (errors) {
-                ExceptionUtils.toRuntime(() ->
-                    FileUtils.moveFileToDirectory(
-                        targetFile,
-                        errorTarget(),
-                        true));
-            }
-        }
-    }
-
-    @Override
-    public Tester<T> script(final Consumer<Tester<T>> script) {
-        script.accept(this);
-
-        return this;
-    }
-
-    @Override
-    public <U> Tester<U> script(final Script<T, U> script) {
-        return script.execute(this);
-    }
-
-    @Override
-    public Tester<T> scenario(final Scenario<T> scenario) {
-
-        getFiles(inputResourcePath)
-            .stream()
-                .filter(File::isFile)
-                .map(File::getName)
-                .forEach((String fileName) -> scenario.execute(fileName, this));
-
-        return this;
-    }
-
-    @Override
-    public Tester<T> scenario(final Consumer<Tester<?>> scenario) {
-
-        getFiles(scenarioPath(resourcePath))
-            .stream()
-                .filter(File::isDirectory)
-                .map(File::getName)
-                .forEach(directory ->
-                    scenario.accept(
-                        newBuilder(this)
-                            .folder(directory)
-                            .name(name)
-                            .scenario(this.scenario)
-                            .resourcePath(resourcePath)
-                            .targetPath(targetPath)
-                            .begin()));
-
-        return this;
     }
 
     @Override
@@ -216,6 +134,22 @@ abstract class AbstractTester<T> implements Tester<T> {
     //--------------------------------------------------------------------------
     // Protected methods
     //--------------------------------------------------------------------------
+    protected String name() {
+        return name;
+    }
+
+    protected String scenario() {
+        return scenario;
+    }
+
+    protected String resourcePath() {
+        return resourcePath;
+    }
+
+    protected String targetPath() {
+        return targetPath;
+    }
+
     protected File inputResource(final String fileName) {
         return getOrCreateFolders(inputResourcePath).resolve(fileName).toFile();
     }
@@ -242,6 +176,27 @@ abstract class AbstractTester<T> implements Tester<T> {
         return new FileOutputStream(file);
     }
 
+    protected Stream<File> getInputResources() {
+        return getFiles(inputResourcePath);
+    }
+
+    protected Path scenarioPath(final String path) {
+        return
+            folder
+                .map(directory  -> Paths.get(path, name, scenario, directory))
+                .orElseGet(()   -> Paths.get(path, name, scenario));
+    }
+
+    protected Stream<File> getFiles(final Path inputResourcePath) {
+        final File folder = getOrCreateFolders(inputResourcePath).toFile();
+        final List<File> files = Arrays.asList(folder.listFiles());
+        if (files.isEmpty()) {
+            throw new NoScenarioException(folder);
+        }
+
+        return files.stream();
+    }
+
     //--------------------------------------------------------------------------
     // Private methods
     //--------------------------------------------------------------------------
@@ -250,37 +205,20 @@ abstract class AbstractTester<T> implements Tester<T> {
             FileUtils.deleteDirectory(errorTarget()));
     }
 
-    private Path scenarioPath(final String path) {
-        return
-            folder
-                .map(directory  -> Paths.get(path, name, scenario, directory))
-                .orElseGet(()   -> Paths.get(path, name, scenario));
-    }
-
     private Path getOrCreateFolders(final Path path) {
         path.toFile().mkdirs();
 
         return path;
     }
 
-    private List<File> getFiles(final Path inputResourcePath) {
-        final File folder = getOrCreateFolders(inputResourcePath).toFile();
-        final List<File> files = Arrays.asList(folder.listFiles());
-        if (files.isEmpty()) {
-            throw new NoScenarioException(folder);
-        }
-
-        return files;
-    }
-
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
-    public static final class Builder<T>
+    public static final class Builder
         implements
-            TesterBuilder<T>,
-            ScenarioNameBuilder<FolderBuilder<Tester<T>>>,
-            FolderBuilder<Tester<T>> {
+            TesterBuilder,
+            ScenarioNameBuilder<FolderBuilder<InactiveTester>>,
+            FolderBuilder<InactiveTester> {
 
         private String              name;
         private String              scenario;
@@ -295,42 +233,42 @@ abstract class AbstractTester<T> implements Tester<T> {
         }
 
         @Override
-        public ScenarioNameBuilder<FolderBuilder<Tester<T>>> name(final String testName) {
+        public ScenarioNameBuilder<FolderBuilder<InactiveTester>> name(final String testName) {
             this.name = testName;
 
             return this;
         }
 
         @Override
-        public FolderBuilder<Tester<T>> scenario(final String scenarioName) {
+        public FolderBuilder<InactiveTester> scenario(final String scenarioName) {
             this.scenario = scenarioName;
 
             return this;
         }
 
         @Override
-        public FolderBuilder<Tester<T>> resourcePath(final String resourcePath) {
+        public FolderBuilder<InactiveTester> resourcePath(final String resourcePath) {
             this.resourcePath = Optional.of(resourcePath);
 
             return this;
         }
 
         @Override
-        public FolderBuilder<Tester<T>> targetPath(final String targetPath) {
+        public FolderBuilder<InactiveTester> targetPath(final String targetPath) {
             this.targetPath = Optional.of(targetPath);
 
             return this;
         }
 
-        public Builder<T> folder(final String folder) {
+        public Builder folder(final String folder) {
             this.folder = Optional.of(folder);
 
             return this;
         }
 
         @Override
-        public Tester<T> begin() {
-            return new InactiveTester<>(this);
+        public InactiveTester begin() {
+            return new DefaultInactiveTester(this);
         }
     }
 }

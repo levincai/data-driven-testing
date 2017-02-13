@@ -1,6 +1,5 @@
 package com.github.karamelsoft.testing.data.driven.testing.core;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class TestFactoryTest {
         final String scenarioName = "no-output-file";
         final String fileName = "doesnotexists.txt";
 
-        final Tester tester =
+        final com.github.karamelsoft.testing.data.driven.testing.api.ActiveTester tester =
             TestFactory.createTest()
                 .name(TEST_NAME)
                 .scenario(scenarioName)
@@ -95,13 +94,11 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("script")
             .begin()
-                .script(tester -> {
-                    tester
-                        .load("one.txt", StringTester.load())
-                        .map(String::toUpperCase)
-                        .save("one.txt", StringTester.save())
-                        .compare("one.txt", StringTester.compare());
-                })
+                .script(tester -> tester
+                    .load("one.txt", StringTester.load())
+                    .map(String::toUpperCase)
+                    .save("one.txt", StringTester.save())
+                    .compare("one.txt", StringTester.compare()))
                 .end();
     }
 
@@ -112,12 +109,12 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("simple-scenario")
             .begin()
-                .scenario((fileName, tester) ->
-                    tester
-                        .load(fileName, StringTester.load())
-                        .map(String::toUpperCase)
-                        .save(fileName, StringTester.save())
-                        .compare(fileName, StringTester.compare()))
+                .scenario((fileName, tester) -> tester
+                    .load(fileName, StringTester.load())
+                    .map(String::toUpperCase)
+                    .save(fileName, StringTester.save())
+                    .compare(fileName, StringTester.compare())
+                    .end())
                 .end();
     }
 
@@ -128,17 +125,16 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("complex-scenario")
             .begin()
-                .scenario(tester ->
-                    tester
-                        .load("headers.txt", StringTester.load())
-                        .map(String::toUpperCase)
-                        .save("headers.txt", StringTester.save())
-                        .compare("headers.txt", StringTester.compare())
-                        .load("body.txt", StringTester.load())
-                        .map(String::toUpperCase)
-                        .save("body.txt", StringTester.save())
-                        .compare("body.txt", StringTester.compare())
-                        .end())
+                .scenario(tester -> tester
+                    .load("headers.txt", StringTester.load())
+                    .map(String::toUpperCase)
+                    .save("headers.txt", StringTester.save())
+                    .compare("headers.txt", StringTester.compare())
+                    .load("body.txt", StringTester.load())
+                    .map(String::toUpperCase)
+                    .save("body.txt", StringTester.save())
+                    .compare("body.txt", StringTester.compare())
+                    .end())
                 .end();
     }
 }

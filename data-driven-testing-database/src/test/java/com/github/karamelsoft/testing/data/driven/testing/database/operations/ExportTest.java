@@ -1,6 +1,6 @@
 package com.github.karamelsoft.testing.data.driven.testing.database.operations;
 
-import com.github.karamelsoft.testing.data.driven.testing.api.Tester;
+import com.github.karamelsoft.testing.data.driven.testing.api.ActiveTester;
 import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
 import com.github.karamelsoft.testing.data.driven.testing.database.DatabaseTester;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -30,7 +30,7 @@ public class ExportTest {
                     "RUNSCRIPT FROM 'classpath:database/create.sql'\\;" +
                     "RUNSCRIPT FROM 'classpath:database/populate.sql'");
 
-        final Tester<Object> inputTester = mock(Tester.class);
+        final ActiveTester<Object> inputTester = mock(ActiveTester.class);
         when(inputTester.value(any()))
             .thenReturn(inputTester);
 
