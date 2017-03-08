@@ -1,8 +1,8 @@
-package org.jsimple.data.driven.testing.xml.function;
+package com.github.karamelsoft.testing.data.driven.testing.xml.operations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.jsimple.data.driven.testing.api.structure.Load;
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Load;
 
 import java.io.IOException;
 import java.io.InputStream;

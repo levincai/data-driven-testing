@@ -1,11 +1,9 @@
-package org.jsimple.data.driven.testing.xml.function;
+package com.github.karamelsoft.testing.data.driven.testing.xml.operations;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
-
-import static org.jsimple.data.driven.testing.xml.function.TestUtils.*;
 
 /**
  * Created by Jonathan Schoreels on 27/06/15.
@@ -19,8 +17,8 @@ public class XmlCompareTest {
         final Boolean equivalent =
             XmlTester.compare(XmlComparisonMode.LENIENT)
                 .equivalent(
-                    getInputStream(RESOURCES, "person1.xml"),
-                    getInputStream(RESOURCES, "person1-similar.xml"));
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1.xml"),
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1-similar.xml"));
 
         Assertions.assertThat(equivalent).isTrue();
     }
@@ -31,8 +29,8 @@ public class XmlCompareTest {
         final Boolean equivalent =
             XmlTester.compare(XmlComparisonMode.STRICT)
                 .equivalent(
-                    getInputStream(RESOURCES, "person1.xml"),
-                    getInputStream(RESOURCES, "person1.xml"));
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1.xml"),
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1.xml"));
 
         Assertions.assertThat(equivalent).isTrue();
     }
@@ -43,8 +41,8 @@ public class XmlCompareTest {
         final Boolean equivalent =
             XmlTester.compare(XmlComparisonMode.STRICT)
                 .equivalent(
-                    getInputStream(RESOURCES, "person1.xml"),
-                    getInputStream(RESOURCES, "person1-withoutwhitespace.xml"));
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1.xml"),
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1-withoutwhitespace.xml"));
 
         Assertions.assertThat(equivalent).isTrue();
     }
@@ -55,8 +53,8 @@ public class XmlCompareTest {
         final Boolean equivalent =
             XmlTester.compare(XmlComparisonMode.LENIENT)
                 .equivalent(
-                    getInputStream(RESOURCES, "person1.xml"),
-                    getInputStream(RESOURCES, "person1-complete.xml"));
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1.xml"),
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1-complete.xml"));
 
         Assertions.assertThat(equivalent).isFalse();
     }
@@ -67,8 +65,8 @@ public class XmlCompareTest {
         final Boolean equivalent =
             XmlTester.compare(XmlComparisonMode.STRICT)
                 .equivalent(
-                    getInputStream(RESOURCES, "person1.xml"),
-                    getInputStream(RESOURCES, "person1-similar.xml"));
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1.xml"),
+                    TestUtils.getInputStream(TestUtils.RESOURCES, "person1-similar.xml"));
 
         Assertions.assertThat(equivalent).isFalse();
     }

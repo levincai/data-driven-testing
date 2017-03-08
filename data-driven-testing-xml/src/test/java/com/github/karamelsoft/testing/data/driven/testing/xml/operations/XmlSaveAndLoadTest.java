@@ -1,4 +1,4 @@
-package org.jsimple.data.driven.testing.xml.function;
+package com.github.karamelsoft.testing.data.driven.testing.xml.operations;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.nio.file.Paths;
 
-import static org.jsimple.data.driven.testing.xml.function.TestUtils.*;
+import static com.github.karamelsoft.testing.data.driven.testing.xml.operations.TestUtils.*;
 
 /**
  * Created by jschoreels on 05.04.16.

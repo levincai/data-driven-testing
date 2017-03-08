@@ -1,8 +1,9 @@
-package org.jsimple.data.driven.testing.xml.function;
+package com.github.karamelsoft.testing.data.driven.testing.xml.operations;
 
-import org.jsimple.data.driven.testing.api.structure.Comparison;
-import org.jsimple.data.driven.testing.api.structure.Load;
-import org.jsimple.data.driven.testing.api.structure.Save;
+
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Comparison;
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Load;
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Save;
 
 /**
  * Created by Jonathan Schoreels on 26/04/15.

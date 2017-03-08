@@ -1,7 +1,7 @@
-package org.jsimple.data.driven.testing.xml.function;
+package com.github.karamelsoft.testing.data.driven.testing.xml.operations;
 
+import com.github.karamelsoft.testing.data.driven.testing.api.operations.Comparison;
 import org.apache.commons.io.IOUtils;
-import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.xmlunit.diff.DefaultNodeMatcher;
 import org.xmlunit.diff.ElementSelectors;
 import org.xmlunit.diff.NodeMatcher;
